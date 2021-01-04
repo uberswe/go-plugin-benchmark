@@ -17,7 +17,7 @@ The other packages use RPC instead of the go plugin package which gets around is
 
 ## Results
 
-The other plugins tested are using RPC which adds about 30 - 40 microseconds to plugin calls (or 0.03 - 0.04 milliseconds) over the golang plugin package.
+The other plugins tested are using RPC which adds about 30 - 50 microseconds to plugin calls (or 0.03 - 0.05 milliseconds) over the golang plugin package.
 
 ## Benchmarks
 
@@ -29,8 +29,8 @@ The other plugins tested are using RPC which adds about 30 - 40 microseconds to 
 | dullgiulio/pingo over tcp  | 20077      | 59301 ns/op |
 | dullgiulio/pingo over unix | 32703      | 37112 ns/op |
 
-Benchmark was performed on a MacBook Pro (15-inch, 2018) with a 2,9 GHz 6-Core Intel Core i9 processor and 32 GB 2400 MHz DDR4 ram
-.
+Benchmark was performed on a MacBook Pro (15-inch, 2018) with a 2,9 GHz 6-Core Intel Core i9 processor and 32 GB 2400 MHz DDR4 ram.
+
 ```
 % bash run.sh
 goos: darwin
