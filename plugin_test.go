@@ -5,6 +5,7 @@ import (
 	"github.com/hashicorp/go-hclog"
 	hashicorpplugin "github.com/hashicorp/go-plugin"
 	"github.com/natefinch/pie"
+	plugplugin "github.com/uberswe/go-plugin-benchmark/plug"
 	"net/rpc/jsonrpc"
 	"os"
 	"os/exec"
@@ -129,4 +130,13 @@ func BenchmarkPingoTcpRandInt(b *testing.B) {
 		}
 	})
 	p2.Stop()
+}
+
+func BenchmarkPlugRandInt(b *testing.B) {
+	service, _ := plugplugin.LoadRandomIntService("./plugplugin")
+	b.Run("plug", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			_, _ = service.Get(1)
+		}
+	})
 }
