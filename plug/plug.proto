@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+package plugpb;
+option go_package = "github.com/elliotmr/plug/pkg/plugpb";
+
+extend google.protobuf.ServiceOptions {
+    string magic = 50001;
+    uint32 version = 50002;
+}
+
+message Handshake {
+    uint32 version = 1;
+    string magic = 2;
+}

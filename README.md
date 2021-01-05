@@ -8,26 +8,28 @@ The following packages have been benchmarked.
  - [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin)
  - [natefinch/pie](https://github.com/natefinch/pie)
  - [dullgiulio/pingo](https://github.com/dullgiulio/pingo)
+ - [elliotmr/plug](https://github.com/elliotmr/plug)
  
-The other packages use RPC instead of the go plugin package which gets around issues such as, but not limited to, [not being compatible with Windows](https://github.com/golang/go/issues/19282) and [package paths and GOPATH needing to be the same between apps and plugins](https://github.com/golang/go/issues/20481).
+Several of the other packages use RPC or similar methods instead of the go plugin package which gets around issues such as, but not limited to, [not being compatible with Windows](https://github.com/golang/go/issues/19282) and [package paths and GOPATH needing to be the same between apps and plugins](https://github.com/golang/go/issues/20481).
 
-**Do you know any other plugin packages?** Please open an issue or pull request.
+**Do you know any other plugin packages?** Please open an [issue](https://github.com/uberswe/go-plugin-benchmark/issues/new) or pull request.
 
-**Found an issue with a benchmark?** Please open an issue or pull request.
+**Found an issue with a benchmark?** Please open an [issue](https://github.com/uberswe/go-plugin-benchmark/issues/new) or pull request.
 
 ## Results
 
-The other plugins tested are using RPC which adds about 30 - 50 microseconds to plugin calls (or 0.03 - 0.05 milliseconds) over the golang plugin package.
+Most plugins tested are using RPC which adds about 30 - 50 microseconds to plugin calls (or 0.03 - 0.05 milliseconds) over the golang plugin package.
 
 ## Benchmarks
 
-| Name                       | Operations | ns/op       |
-| -------------------------- |:----------:| -----------:|
-| go plugin package          | 83219025   | 13.9 ns/op  |
-| hashicorp/go-plugin        | 28734      | 42339 ns/op |
-| natefinch/pie              | 32331      | 35005 ns/op |
-| dullgiulio/pingo over tcp  | 20077      | 59301 ns/op |
-| dullgiulio/pingo over unix | 32703      | 37112 ns/op |
+| Name                       | Operations  | ns/op       |
+| -------------------------- |:-----------:| -----------:|
+| go plugin package          | 85481671    | 13.8 ns/op  |
+| hashicorp/go-plugin        | 27888       | 43508 ns/op |
+| natefinch/pie              | 33175       | 36892 ns/op |
+| dullgiulio/pingo over tcp  | 19911       | 60874 ns/op |
+| dullgiulio/pingo over unix | 31688       | 37106 ns/op |
+| elliotmr/plug              | 101408      | 12022 ns/op |
 
 Benchmark was performed on a MacBook Pro (15-inch, 2018) with a 2,9 GHz 6-Core Intel Core i9 processor and 32 GB 2400 MHz DDR4 ram.
 
@@ -36,11 +38,12 @@ Benchmark was performed on a MacBook Pro (15-inch, 2018) with a 2,9 GHz 6-Core I
 goos: darwin
 goarch: amd64
 pkg: github.com/uberswe/go-plugin-benchmark
-BenchmarkPluginRandInt/golang-plugin-12         83219025                13.9 ns/op
-BenchmarkHashicorpGoPluginRandInt/hashicorp-go-plugin-12                   28734             42339 ns/op
-BenchmarkPieRandInt/pie-12                                                 32331             35005 ns/op
-BenchmarkPingoTcpRandInt/pingo-tcp-12                                      20077             59301 ns/op
-BenchmarkPingoTcpRandInt/pingo-unix-12                                     32703             37112 ns/op
+BenchmarkPluginRandInt/golang-plugin-12         85481671                13.8 ns/op
+BenchmarkHashicorpGoPluginRandInt/hashicorp-go-plugin-12                   27888             43508 ns/op
+BenchmarkPieRandInt/pie-12                                                 33175             36892 ns/op
+BenchmarkPingoTcpRandInt/pingo-tcp-12                                      19911             60874 ns/op
+BenchmarkPingoTcpRandInt/pingo-unix-12                                     31688             37106 ns/op
+BenchmarkPlugRandInt/plug-12                                              101408             12022 ns/op
 PASS
-ok      github.com/uberswe/go-plugin-benchmark  8.425s
+ok      github.com/uberswe/go-plugin-benchmark  9.947s
 ```

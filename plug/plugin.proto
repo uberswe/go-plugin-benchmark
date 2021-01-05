@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "plug.proto";
+
+package plugin;
+option go_package = "uberswe/go-plugin-benchmark/plug";
+
+message RandIntRequest {
+    int64 key = 1;
+}
+
+message RandIntResponse {
+    int64 value = 1;
+}
+
+service RandomIntService {
+    rpc Get(RandIntRequest) returns (RandIntResponse);
+}

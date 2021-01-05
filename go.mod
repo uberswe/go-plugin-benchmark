@@ -4,8 +4,9 @@ go 1.15
 
 require (
 	github.com/dullgiulio/pingo v0.0.0-20151111190101-8b1949e35b5a
+	github.com/elliotmr/plug v0.0.3
 	github.com/fatih/color v1.10.0 // indirect
-	github.com/golang/protobuf v1.4.3 // indirect
+	github.com/golang/protobuf v1.4.3
 	github.com/hashicorp/go-hclog v0.15.0
 	github.com/hashicorp/go-plugin v1.4.0
 	github.com/hashicorp/yamux v0.0.0-20200609203250-aecfd211c9ce // indirect
@@ -17,4 +18,5 @@ require (
 	golang.org/x/text v0.3.4 // indirect
 	google.golang.org/genproto v0.0.0-20201214200347-8c77b98c765d // indirect
 	google.golang.org/grpc v1.34.0 // indirect
+	google.golang.org/protobuf v1.25.0
 )
