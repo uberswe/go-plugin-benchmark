@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "plug.proto";
-
 package plugin;
 option go_package = "uberswe/go-plugin-benchmark/plug";
 
