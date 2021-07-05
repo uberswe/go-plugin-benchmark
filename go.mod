@@ -13,6 +13,7 @@ require (
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/natefinch/pie v0.0.0-20170715172608-9a0d72014007
 	github.com/oklog/run v1.1.0 // indirect
+	github.com/traefik/yaegi v0.9.19
 	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
 	golang.org/x/sys v0.0.0-20201231184435-2d18734c6014 // indirect
 	golang.org/x/text v0.3.4 // indirect
