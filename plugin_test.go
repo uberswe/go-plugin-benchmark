@@ -5,6 +5,8 @@ import (
 	"github.com/hashicorp/go-hclog"
 	hashicorpplugin "github.com/hashicorp/go-plugin"
 	"github.com/natefinch/pie"
+	"github.com/traefik/yaegi/interp"
+	"github.com/traefik/yaegi/stdlib"
 	plugplugin "github.com/uberswe/go-plugin-benchmark/plug"
 	"net/rpc/jsonrpc"
 	"os"
@@ -137,6 +139,34 @@ func BenchmarkPlugRandInt(b *testing.B) {
 	b.Run("plug", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			_, _ = service.Get(1)
+		}
+	})
+}
+
+func BenchmarkYaegiRandInt(b *testing.B) {
+	var src = `package test
+import "math/rand"
+func RandInt(i int) int { return rand.Int() }`
+
+	i := interp.New(interp.Options{})
+
+	// To handle import of "math/rand"
+	i.Use(stdlib.Symbols)
+
+	_, err := i.Eval(src)
+	if err != nil {
+		panic(err)
+	}
+
+	v, err := i.Eval("test.RandInt")
+	if err != nil {
+		panic(err)
+	}
+
+	randIntFunc := v.Interface().(func(int) int)
+	b.Run("yaegi", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			_ = randIntFunc(1)
 		}
 	})
 }
