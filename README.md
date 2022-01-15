@@ -27,31 +27,31 @@ Most plugins tested are using RPC which adds about 30 - 50 microseconds to plugi
 
 | Name                       | Operations   | ns/op       |
 | -------------------------- |:------------:| -----------:|
-| go plugin package          | 76898038     | 13.89 ns/op |
-| hashicorp/go-plugin        | 24984        | 42563 ns/op |
-| natefinch/pie              | 33962        | 37022 ns/op |
-| dullgiulio/pingo over tcp  | 22694        | 53541 ns/op |
-| dullgiulio/pingo over unix | 29288        | 36140 ns/op |
-| elliotmr/plug              | 96416        | 12674 ns/op |
-| traefik/yaegi              | 1771837      | 713.4 ns/op |
+| go plugin package          | 87296470     | 13.50 ns/op |
+| hashicorp/go-plugin        | 26695        | 44913 ns/op |
+| natefinch/pie              | 32142        | 37148 ns/op |
+| dullgiulio/pingo over tcp  | 21369        | 56459 ns/op |
+| dullgiulio/pingo over unix | 30313        | 38929 ns/op |
+| elliotmr/plug              | 100197        | 12196 ns/op |
+| traefik/yaegi              | 1447602      | 898.2 ns/op |
 
-Last run on July 5th, 2021. Benchmark performed on a MacBook Pro (15-inch, 2018) with a 2,9 GHz 6-Core Intel Core i9 processor and 32 GB 2400 MHz DDR4 ram.
+Last run on January 15th, 2022 with Go version 1.17.6. Benchmark performed on a MacBook Pro (15-inch, 2018) with a 2,9 GHz 6-Core Intel Core i9 processor and 32 GB 2400 MHz DDR4 ram.
 
 ```
-% bash run.sh 
+% bash ./run.sh
 goos: darwin
 goarch: amd64
 pkg: github.com/uberswe/go-plugin-benchmark
 cpu: Intel(R) Core(TM) i9-8950HK CPU @ 2.90GHz
-BenchmarkPluginRandInt/golang-plugin-12         76898038                13.89 ns/op
-BenchmarkHashicorpGoPluginRandInt/hashicorp-go-plugin-12                   24984             42563 ns/op
-BenchmarkPieRandInt/pie-12                                                 33962             37022 ns/op
-BenchmarkPingoTcpRandInt/pingo-tcp-12                                      22694             53541 ns/op
-BenchmarkPingoTcpRandInt/pingo-unix-12                                     29288             36140 ns/op
-BenchmarkPlugRandInt/plug-12                                               96416             12674 ns/op
-BenchmarkYaegiRandInt/yaegi-12                                           1771837               713.4 ns/op
+BenchmarkPluginRandInt/golang-plugin-12         87296470                13.50 ns/op
+BenchmarkHashicorpGoPluginRandInt/hashicorp-go-plugin-12                   26695             44913 ns/op
+BenchmarkPieRandInt/pie-12                                                 32142             37148 ns/op
+BenchmarkPingoTcpRandInt/pingo-tcp-12                                      21369             56459 ns/op
+BenchmarkPingoTcpRandInt/pingo-unix-12                                     30313             38929 ns/op
+BenchmarkPlugRandInt/plug-12                                              100197             12196 ns/op
+BenchmarkYaegiRandInt/yaegi-12                                           1447602               898.2 ns/op
 PASS
-ok      github.com/uberswe/go-plugin-benchmark  11.760s
+ok      github.com/uberswe/go-plugin-benchmark  12.279s
 ```
 
 ## Contributing
