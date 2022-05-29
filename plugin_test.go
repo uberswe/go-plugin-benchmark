@@ -1,10 +1,12 @@
 package benchmark
 
 import (
+	"fmt"
 	"github.com/dullgiulio/pingo"
 	"github.com/hashicorp/go-hclog"
 	hashicorpplugin "github.com/hashicorp/go-plugin"
 	"github.com/natefinch/pie"
+	"github.com/pkujhd/goloader"
 	"github.com/traefik/yaegi/interp"
 	"github.com/traefik/yaegi/stdlib"
 	plugplugin "github.com/uberswe/go-plugin-benchmark/plug"
@@ -14,6 +16,7 @@ import (
 	"plugin"
 	"runtime"
 	"testing"
+	"unsafe"
 )
 
 // BenchmarkPluginRandInt uses a go plugin and tests math/rand for generating random integers
@@ -169,4 +172,43 @@ func RandInt(i int) int { return rand.Int() }`
 			_ = randIntFunc(1)
 		}
 	})
+}
+
+func BenchmarkGoloaderRandInt(b *testing.B) {
+	linker, err := goloader.ReadObjs([]string{"goloader.o"}, []string{""})
+	if err != nil {
+		b.Error(err)
+		return
+	}
+
+	run := "main.RandInt"
+
+	symPtr := make(map[string]uintptr)
+	err = goloader.RegSymbol(symPtr)
+	if err != nil {
+		b.Error(err)
+		return
+	}
+
+	codeModule, err := goloader.Load(linker, symPtr)
+	if err != nil {
+		fmt.Println("Load error:", err)
+		return
+	}
+	runFuncPtr := codeModule.Syms[run]
+	if runFuncPtr == 0 {
+		fmt.Println("Load error! not find function:", run)
+		return
+	}
+	funcPtrContainer := (uintptr)(unsafe.Pointer(&runFuncPtr))
+	runFunc := *(*func() int)(unsafe.Pointer(&funcPtrContainer))
+
+	b.Run("goloader", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			_ = runFunc()
+		}
+	})
+
+	os.Stdout.Sync()
+	codeModule.Unload()
 }
