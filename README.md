@@ -19,6 +19,13 @@ With the addition of [Yaegi](https://github.com/traefik/yaegi), I am also benchm
 
 **Found an issue with a benchmark?** Please open an [issue](https://github.com/uberswe/go-plugin-benchmark/issues/new) or pull request.
 
+## Setup
+
+The Goloader package requires the following to work
+```
+cp -r $GOROOT/src/cmd/internal $GOROOT/src/cmd/objfile
+```
+
 ## Results
 
 Most plugins tested are using RPC which adds about 30 - 50 microseconds to plugin calls (or 0.03 - 0.05 milliseconds) over the golang plugin package.
