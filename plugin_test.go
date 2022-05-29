@@ -203,9 +203,11 @@ func BenchmarkGoloaderRandInt(b *testing.B) {
 	funcPtrContainer := (uintptr)(unsafe.Pointer(&runFuncPtr))
 	runFunc := *(*func() int)(unsafe.Pointer(&funcPtrContainer))
 
-	for i := 0; i < b.N; i++ {
-		_ = runFunc()
-	}
+	b.Run("goloader", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			_ = runFunc()
+		}
+	})
 
 	os.Stdout.Sync()
 	codeModule.Unload()
