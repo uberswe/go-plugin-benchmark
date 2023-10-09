@@ -175,7 +175,7 @@ func RandInt(i int) int { return rand.Int() }`
 }
 
 func BenchmarkGoloaderRandInt(b *testing.B) {
-	linker, err := goloader.ReadObjs([]string{"goloader.o"}, []string{""})
+	linker, err := goloader.ReadObjs([]string{"goloader.o"}, []string{"importcfg"})
 	if err != nil {
 		b.Error(err)
 		return
