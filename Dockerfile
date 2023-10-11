@@ -6,7 +6,6 @@ COPY . ./
 
 ENV GO111MODULE=on
 ENV GOARCH=amd64
-ENV CGO_ENABLED=1
 
 RUN apt-get update
 RUN apt-get install gcc
@@ -18,7 +17,7 @@ RUN go build -o ./pieplugin ./pie/main.go
 RUN go build -o ./pingoplugin ./pingo/main.go
 RUN go build -o ./plugplugin ./plug/plugin/main.go
 RUN go list -export -f '{{if .Export}}packagefile {{.ImportPath}}={{.Export}}{{end}}' std `go list -f {{.Imports}} ./goloader/main.go | awk '{sub(/^\[/, ""); print }' | awk '{sub(/\]$/, ""); print }'` > importcfg
-RUN go tool compile -importcfg importcfg -o ./goloader.o ./goloader/main.go
+RUN CGO_ENABLED=0 go tool compile -importcfg importcfg -o ./goloader.o ./goloader/main.go
 
 CMD ["go", "test", "-bench=."]
 

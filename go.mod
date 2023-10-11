@@ -9,7 +9,7 @@ require (
 	github.com/hashicorp/go-hclog v1.5.0
 	github.com/hashicorp/go-plugin v1.5.2
 	github.com/natefinch/pie v0.0.0-20170715172608-9a0d72014007
-	github.com/pkujhd/goloader v0.0.0-20220509034319-898ebfc025e3
+	github.com/pkujhd/goloader v0.0.0-20230918021236-475614750c78
 	github.com/traefik/yaegi v0.9.19
 	google.golang.org/protobuf v1.31.0
 )

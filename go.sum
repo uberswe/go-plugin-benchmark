@@ -60,8 +60,8 @@ github.com/natefinch/pie v0.0.0-20170715172608-9a0d72014007 h1:Ohgj9L0EYOgXxkDp+
 github.com/natefinch/pie v0.0.0-20170715172608-9a0d72014007/go.mod h1:wKCOWMb6iNlvKiOToY2cNuaovSXvIiv1zDi9QDR7aGQ=
 github.com/oklog/run v1.1.0 h1:GEenZ1cK0+q0+wsJew9qUg/DyD8k3JzYsZAi5gYi2mA=
 github.com/oklog/run v1.1.0/go.mod h1:sVPdnTZT1zYwAJeCMu2Th4T21pA3FPOQRfWjQlk7DVU=
-github.com/pkujhd/goloader v0.0.0-20220509034319-898ebfc025e3 h1:DlWcHsF5m3LQxIFByUAvzfh9nxEzPE2vqTp+s6vttRc=
-github.com/pkujhd/goloader v0.0.0-20220509034319-898ebfc025e3/go.mod h1:JQc0eCq8bTqZremrbWWBXTYAj/82bEnPl/9g+nKIsuA=
+github.com/pkujhd/goloader v0.0.0-20230918021236-475614750c78 h1:DXipSG6sizuYMpGvAo75P/8JqxQLIQEzt4PhKB69I3Q=
+github.com/pkujhd/goloader v0.0.0-20230918021236-475614750c78/go.mod h1:JQc0eCq8bTqZremrbWWBXTYAj/82bEnPl/9g+nKIsuA=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/prometheus/client_model v0.0.0-20190812154241-14fe0d1b01d4/go.mod h1:xMI15A0UPsDsEKsMN9yxemIoYk6Tm2C1GtYGdfGttqA=
