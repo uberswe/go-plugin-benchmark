@@ -7,6 +7,8 @@ import (
 	hashicorpplugin "github.com/hashicorp/go-plugin"
 	"github.com/natefinch/pie"
 	"github.com/pkujhd/goloader"
+	"github.com/second-state/WasmEdge-go/wasmedge"
+	bindgen "github.com/second-state/wasmedge-bindgen/host/go"
 	"github.com/traefik/yaegi/interp"
 	"github.com/traefik/yaegi/stdlib"
 	plugplugin "github.com/uberswe/go-plugin-benchmark/plug"
@@ -209,5 +211,34 @@ func BenchmarkGoloaderRandInt(b *testing.B) {
 
 		os.Stdout.Sync()
 		codeModule.Unload()
+	})
+}
+
+func BenchmarkWasmEdgeRandInt(b *testing.B) {
+	var conf = wasmedge.NewConfigure(wasmedge.WASI)
+	defer conf.Release()
+
+	var vm = wasmedge.NewVMWithConfig(conf)
+	defer vm.Release()
+
+	var wasi = vm.GetImportModule(wasmedge.WASI)
+	wasi.InitWasi([]string{"./wasm-edge.wasm"}, os.Environ(), []string{".:."})
+	vm.LoadWasmFile("./wasm-edge.wasm")
+	vm.Validate()
+
+	bg := bindgen.New(vm)
+	defer bg.Release()
+	bg.Instantiate()
+
+	b.Run("wasm-edge", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			res, _, err := bg.Execute("RandInt")
+			if err != nil {
+				fmt.Println("Error when executing RandInt:", err)
+				return
+			}
+
+			fmt.Println("Success! Returned value:", res)
+		}
 	})
 }
