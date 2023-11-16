@@ -6,14 +6,15 @@ A comparison of the [go plugin package](https://golang.org/pkg/plugin/) and othe
 
 | Name                                                          | Operations (higher is better) | ns/op (lower is better) |    type     |
 |---------------------------------------------------------------|:-----------------------------:|------------------------:|:-----------:|
-| [go plugin package](https://golang.org/pkg/plugin/)           |           38803566            |             27.79 ns/op |   native    |
-| [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin) |             3211              |            360805 ns/op |     rpc     |
-| [natefinch/pie](https://github.com/natefinch/pie)             |             3956              |            315455 ns/op |     rpc     |
-| [dullgiulio/pingo](https://github.com/dullgiulio/pingo)       |             3861              |            315183 ns/op |     tcp     |
-| [dullgiulio/pingo](https://github.com/dullgiulio/pingo)       |             3295              |            334641 ns/op |    unix     |
-| [elliotmr/plug](https://github.com/elliotmr/plug)             |             10000             |            136947 ns/op |     ipc     |
-| [traefik/yaegi](https://github.com/traefik/yaegi)             |            1156857            |              1029 ns/op | interpreter |
-| [pkujhd/goloader](https://github.com/pkujhd/goloader)         |           66774448            |             18.82 ns/op |   native    |
+| [go plugin package](https://golang.org/pkg/plugin/)           |           44219324            |             30.35 ns/op |   native    |
+| [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin) |             3682              |            413257 ns/op |     rpc     |
+| [natefinch/pie](https://github.com/natefinch/pie)             |             3933              |            328025 ns/op |     rpc     |
+| [dullgiulio/pingo](https://github.com/dullgiulio/pingo)       |             4197              |            329354 ns/op |     tcp     |
+| [dullgiulio/pingo](https://github.com/dullgiulio/pingo)       |             3110              |            465628 ns/op |    unix     |
+| [elliotmr/plug](https://github.com/elliotmr/plug)             |             7998              |            162677 ns/op |     ipc     |
+| [traefik/yaegi](https://github.com/traefik/yaegi)             |            1000000            |              1184 ns/op | interpreter |
+| [pkujhd/goloader](https://github.com/pkujhd/goloader)         |           68201743            |             19.11 ns/op |   native    |
+| [tetratelabs/wazero](https://github.com/tetratelabs/wazero)   |           11401358            |             105.0 ns/op |   native    |
  
 Several of the other packages use RPC or similar methods instead of the go plugin package which gets around issues such as, but not limited to, [not being compatible with Windows](https://github.com/golang/go/issues/19282) and [package paths and GOPATH needing to be the same between apps and plugins](https://github.com/golang/go/issues/20481).
 
