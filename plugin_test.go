@@ -7,9 +7,12 @@ import (
 	hashicorpplugin "github.com/hashicorp/go-plugin"
 	"github.com/natefinch/pie"
 	"github.com/pkujhd/goloader"
+	"github.com/tetratelabs/wazero"
+	"github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1"
 	"github.com/traefik/yaegi/interp"
 	"github.com/traefik/yaegi/stdlib"
 	plugplugin "github.com/uberswe/go-plugin-benchmark/plug"
+	"context"
 	"net/rpc/jsonrpc"
 	"os"
 	"os/exec"
@@ -209,5 +212,36 @@ func BenchmarkGoloaderRandInt(b *testing.B) {
 
 		os.Stdout.Sync()
 		codeModule.Unload()
+	})
+}
+
+func BenchmarkWazeroRandInt(b *testing.B) {
+	wasmFile, err := os.ReadFile("wazero.wasm")
+	if err != nil {
+		fmt.Println("failed to read file:", err)
+		return
+	}
+
+	ctx := context.Background()
+	runtime := wazero.NewRuntime(ctx)
+	defer runtime.Close(ctx)
+
+	wasi_snapshot_preview1.MustInstantiate(ctx, runtime)
+
+	module, err := runtime.Instantiate(ctx, wasmFile)
+	if err != nil {
+		fmt.Println("failed to instantiate module:", err)
+		return
+	}
+
+	b.Run("wazero", func(b *testing.B) {
+		randIntFunction := module.ExportedFunction("RandInt")
+
+		for i := 0; i < b.N; i++ {
+			if _, err := randIntFunction.Call(ctx); err != nil {
+				fmt.Println("failed to call function:", err)
+				return
+			}
+		}
 	})
 }
